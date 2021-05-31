@@ -33,7 +33,6 @@ public class Movies {
 	public Director director;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonIgnore
 	private Singer singer;
 	
 	

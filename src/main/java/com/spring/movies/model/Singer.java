@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Singer{
 	
@@ -21,16 +23,15 @@ public class Singer{
 	private String sgender;
 	private String song;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "singer",cascade = CascadeType.ALL)
     private List<Movies> movie2=new ArrayList<>();
 	
 	
-	@PrePersist
-	public void addChild() {
-		this.movie2.forEach(movies->{movies.setSinger(this);  });
-	}
-
+	/*
+	 * @PrePersist public void addChild() {
+	 * this.movie2.forEach(movies->{movies.setSinger(this); }); }
+	 */
 
 	public int getSid() {
 		return sid;

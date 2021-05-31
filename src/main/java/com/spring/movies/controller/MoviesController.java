@@ -46,7 +46,7 @@ public class MoviesController {
 		
 		//POST METHOD--create movie
 		@PostMapping("/movies/post")
-		public Movies createMovies(@RequestBody Movies movies) {
+		public List<Movies> createMovies(@RequestBody List<Movies> movies) {
 			return moviesServices.createMovies(movies);
 			
 		}

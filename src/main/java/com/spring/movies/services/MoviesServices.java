@@ -43,8 +43,8 @@ public class MoviesServices {
 		
 		
 		//POST METHOD--create movie
-		public Movies createMovies(@RequestBody Movies movies) {
-			return moviesInterface.save(movies);
+		public List<Movies>  createMovies(@RequestBody List<Movies> movies) {
+			return moviesInterface.saveAll(movies);
 			
 		}
 		
