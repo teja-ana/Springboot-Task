@@ -52,7 +52,7 @@ public class MoviesController {
 		}
 		
 		//PuT METHOD-- update movies
-			@PutMapping("/movies/put")
+		@PutMapping("/movies/put")
 		public Movies updateMovies( @RequestBody Movies moviesDetails) {
 			return moviesServices.updateMovies(moviesDetails);
 		}
@@ -64,29 +64,28 @@ public class MoviesController {
 			return moviesServices.deleteById(mid);
 		}
 		
-		//director
+		//DIRECTOR
 		//GET METHOD --create get all movies
-				@GetMapping("/director/get")
-				public List<Movies> getAlldirectors(){
-					return moviesServices.getAlldirectors();
-				}
+		@GetMapping("/director/get")
+		public List<Movies> getAlldirectors(){
+			return moviesServices.getAlldirectors();
+		}
 		
 				
 				
-		//singer
+		//SINGER
 		//POST METHOD--create movie
 		@PostMapping("/singer/post")
-				public Singer createSinger(@RequestBody Singer singer) {
-					return moviesServices.createSinger(singer);
-					
-				}
+		public Singer createSinger(@RequestBody Singer singer) {
+			return moviesServices.createSinger(singer);					
+		}
 		
 		
 		//GET METHOD --create get all singer
-				@GetMapping("/singer/get")
-				public List<Singer> getAllSinger(){
-					return moviesServices.getAllSinger();
-				}
+		@GetMapping("/singer/get")
+		public List<Singer> getAllSinger(){
+			return moviesServices.getAllSinger();
+		}
 				
 				
 				
