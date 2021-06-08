@@ -2,49 +2,56 @@ package com.spring.movies.services;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.spring.movies.MovieAppApplication;
+import com.spring.movies.exception.CustomExceptions;
 import com.spring.movies.model.Movies;
 import com.spring.movies.model.Singer;
-import com.spring.movies.repo.DirectorInterface;
-import com.spring.movies.repo.MoviesInterface;
-import com.spring.movies.repo.SingerInterface;
+import com.spring.movies.repo.DirectorRepo;
+import com.spring.movies.repo.MoviesRepo;
+import com.spring.movies.repo.SingerRepo;
 
 
 @Component
 public class MoviesServices {
 	
-	@Autowired
-	private MoviesInterface moviesInterface;
 	
-	@Autowired
-	private DirectorInterface directorInterface;
+	private static Logger logger=Logger.getLogger(MovieAppApplication.class);
 	
 	
 	@Autowired
-	private SingerInterface singerInterface;
+	private MoviesRepo moviesRepo;
+	
+	@Autowired
+	private DirectorRepo directorRepo;
+	
+	
+	@Autowired
+	private SingerRepo singerRepo;
 	
 
 		//GET METHOD -- get all movies 
 		public List<Movies> getAllMovies(){
-			return moviesInterface.findAll();
+			return moviesRepo.findAll();
 		}
 		
 		
 		//GET METHOD BY ID--get movie by id
 		public Movies getMoviesById(@PathVariable(value = "mid") int mid) {
-			Movies movies = moviesInterface.findById(mid).orElse(new Movies());
+			Movies movies = moviesRepo.findById(mid).orElse(new Movies());
 			return movies;
 		}
 		
 		
 		//POST METHOD--create movie
 		public List<Movies>  createMovies(@RequestBody List<Movies> movies) {
-			return moviesInterface.saveAll(movies);
+			return moviesRepo.saveAll(movies);
 			
 		}
 		
@@ -52,15 +59,15 @@ public class MoviesServices {
 		//PuT METHOD-- update movies
 		public Movies updateMovies(
 				 @RequestBody Movies moviesDetails) {
-			Movies movies = moviesInterface.save(moviesDetails);
+			Movies movies = moviesRepo.save(moviesDetails);
 			return movies;
 		}
 		
 		
 		//DELETE METHOD -- delete movies by id
 		public String deleteById(@PathVariable(value = "mid") int mid) {
-			Movies movies =moviesInterface.findById(mid).orElse(null);
-			moviesInterface.delete(movies);
+			Movies movies =moviesRepo.findById(mid).orElse(null);
+			moviesRepo.delete(movies);
 			return "deleted sucess";
 			
 		}
@@ -69,7 +76,7 @@ public class MoviesServices {
 		//GET METHOD -- get all director
 		public List<Movies> getAlldirectors() {
 			
-			return moviesInterface.findAll();
+			return moviesRepo.findAll();
 		}
 		
 		
@@ -77,15 +84,30 @@ public class MoviesServices {
 		//POST METHOD--create movie
 		public Singer createSinger(@RequestBody Singer singer) {
 			System.out.println(singer.toString());
-			return singerInterface.save(singer);
+			return singerRepo.save(singer);
 			
 		}
 		
 		
 		public List<Singer> getAllSinger(){	
-			return singerInterface.findAll();
+			return singerRepo.findAll();
 		}
 		
-		
+		@Autowired
+		CustomExceptions customExceptions;
+		//Exception Handling
+		public Movies findByTitle(String title ){
+			Movies movies;
+			movies=moviesRepo.findByTitle(title);
+			if(movies!=null) {	
+				return movies;
+			}
+			else {
+				
+				logger.error(customExceptions.printError("Movie-Title : "+ title +" Not Found"));
+				//throw new CustomExceptions("Movie-Title : "+ title +" Not Found");
+			}
+			return null;
+		}
 		
 }

@@ -1,0 +1,14 @@
+
+
+2021-06-04 16:16:30 INFO com.spring.movies.MovieAppApplication:52 - in GET ALL MOVIES
+
+2021-06-04 16:19:16 INFO com.spring.movies.MovieAppApplication:52 getAllMovies - in GET ALL MOVIES
+
+2021-06-04 16:22:20 INFO com.spring.movies.MovieAppApplication:52 [getAllMovies] - in GET ALL MOVIES
+
+2021-06-04 16:22:41 INFO com.spring.movies.MovieAppApplication:52 [getAllMovies] - in GET ALL MOVIES
+
+2021-06-04 21:19:29 INFO com.spring.movies.MovieAppApplication:52 [getAllMovies] - in GET ALL MOVIES
+
+2021-06-06 14:25:28 ERROR com.spring.movies.MovieAppApplication:107 [findByTitle] - Movie-Title : title40 Not Found
+
